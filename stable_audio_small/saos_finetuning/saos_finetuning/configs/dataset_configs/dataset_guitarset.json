@@ -1,0 +1,11 @@
+{
+"dataset_type": "audio_dir",
+"datasets": [
+{
+"id":"guitarset",
+"path":"../../data/processed/guitarset_train_echo_75",
+"custom_metadata_module": "../../saos_finetuning/configs/dataset.py"
+}
+],
+"random_crop": false
+}
