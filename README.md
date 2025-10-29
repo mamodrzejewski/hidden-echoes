@@ -1,1 +1,2 @@
-# hidden-echoes-experiments
+# hidden echoes work in progress
+
