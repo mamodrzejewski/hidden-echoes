@@ -1,2 +1,2 @@
-stable_audio_small/saos_finetuning/models/*.ckpt
+*.ckpt
 stable_audio_small/saos_finetuning/external/
