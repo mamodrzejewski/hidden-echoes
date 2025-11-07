@@ -3,3 +3,4 @@ matplotlib-3.10.7
 tqdm
 librosa
 pesto-pitch
+v-diffusion-pytorch
