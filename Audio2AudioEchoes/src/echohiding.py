@@ -208,7 +208,7 @@ def get_z_score(c, delta, buff=0, start_buff=0):
     std = np.nanstd(cmu)
     return (c[delta]-mu)/std
     
-    def get_median_z_score(c, delta, buff=0, start_buff=0):
+def get_median_z_score(c, delta, buff=0, start_buff=0):
     """
     Compute a median/MAD z-score 
     
