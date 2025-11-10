@@ -207,3 +207,62 @@ def get_z_score(c, delta, buff=0, start_buff=0):
     mu = np.nanmean(cmu)
     std = np.nanstd(cmu)
     return (c[delta]-mu)/std
+    
+    def get_median_z_score(c, delta, buff=0, start_buff=0):
+    """
+    Compute a median/MAD z-score 
+    
+    Parameters
+    ----------
+    c: ndarray(N)
+        Correlation vector/cepstrum
+    delta: int
+        Delay at which to check for the pseudorandom sequence
+    buff: int
+        Buffer on either side of delta to ignore when computing mu/std
+        for z-score
+    start_buff: int
+        Ignore this many from the start when computing mu/std 
+        for z-score
+    """
+    cmu = np.array(c)
+    if start_buff > 0:
+        cmu[0:start_buff] = np.nan
+    cmu[delta-buff:delta+buff+1] = np.nan
+    mu = np.nanmedian(cmu)
+    mad = np.nanmedian(np.absolute(cmu - np.nanmedian(cmu)))
+    return (c[delta]-mu)/mad    
+
+def get_local_peak_z(c, delta, search_width=3, buff=0, start_buff=0):
+    """
+    Compute a z-score for maximum value in selected neighborhood
+    Parameters
+    ----------
+    c: ndarray(N)
+        Correlation vector/cepstrum
+    delta: int
+        Delay at which to check for the pseudorandom sequence
+    search_width: int
+        Window size before and after offset point
+    buff: int
+        Buffer on either side of delta to ignore when computing mu/std
+        for z-score
+    start_buff: int
+        Ignore this many from the start when computing mu/std 
+        for z-score
+    """
+    start = max(delta - search_width, 0)
+    end = min(delta + search_width + 1, len(c))
+    
+    local_idx = np.argmax(c[start:end]) + start
+    local_val = c[local_idx]
+    
+    cmu = np.array(c)
+    if start_buff > 0:
+        cmu[0:start_buff] = np.nan
+    cmu[local_idx-buff:local_idx+buff+1] = np.nan
+    mu = np.nanmean(cmu)
+    std = np.nanstd(cmu)
+    
+    z = (local_val - mu) / std
+    return z
