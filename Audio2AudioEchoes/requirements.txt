@@ -4,3 +4,5 @@ tqdm
 librosa
 pesto-pitch
 v-diffusion-pytorch
+audio-metrics
+laion-clap

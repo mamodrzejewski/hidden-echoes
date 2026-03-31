@@ -1,2 +1,3 @@
 *.ckpt
 stable_audio_small/saos_finetuning/external/
+.venv
